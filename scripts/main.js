@@ -1,65 +1,50 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-}
+document.getElementById('submitBtn').addEventListener('click', () => {
+    // Collect form data
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const address = document.getElementById('address').value;
+    const q1 = parseInt(document.getElementById('q1').value, 10);
+    const q2 = parseInt(document.getElementById('q2').value, 10);
+    const q3 = parseInt(document.getElementById('q3').value, 10);
+    const q4 = parseInt(document.getElementById('q4').value, 10);
+    const q5 = parseInt(document.getElementById('q5').value, 10);
 
-.container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
+    // Create JavaScript object
+    const formData = {
+        firstName,
+        lastName,
+        email,
+        phone,
+        address,
+        ratings: { q1, q2, q3, q4, q5 }
+    };
 
-h1, h2 {
-    color: #333;
-}
+    // Log data to console
+    console.log(formData);
 
-form {
-    display: flex;
-    flex-direction: column;
-}
+    // Display data on the website
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = `
+        <p><strong>First Name:</strong> ${firstName}</p>
+        <p><strong>Last Name:</strong> ${lastName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Address:</strong> ${address}</p>
+        <p><strong>Ratings:</strong></p>
+        <ul>
+            <li>Website Satisfaction: ${q1}</li>
+            <li>Recommendation Likelihood: ${q2}</li>
+            <li>Ease of Navigation: ${q3}</li>
+            <li>Content Quality: ${q4}</li>
+            <li>Customer Support: ${q5}</li>
+        </ul>
+    `;
 
-label {
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-input {
-    margin-top: 5px;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.results {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #f1f1f1;
-    border-radius: 8px;
-}
-
-.results p {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #333;
-}
+    // Calculate and display average rating
+    const average = ((q1 + q2 + q3 + q4 + q5) / 5).toFixed(2);
+    resultsDiv.innerHTML += `
+        <p><strong>Average Rating:</strong> ${firstName} ${lastName} (${email}): ${average}</p>
+    `;
+});
