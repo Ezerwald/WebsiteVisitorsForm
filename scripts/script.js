@@ -11,7 +11,7 @@ document.getElementById('submitBtn').addEventListener('click', () => {
     const q4 = parseInt(document.getElementById('q4').value, 10);
     const q5 = parseInt(document.getElementById('q5').value, 10);
 
-    // Validation
+    // Validation for text fields
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^\d{10}$/; // 10-digit phone number
     const addressRegex = /^.{5,}$/; // Minimum 5 characters for address
@@ -27,6 +27,15 @@ document.getElementById('submitBtn').addEventListener('click', () => {
     if (!addressRegex.test(address)) {
         alert("Address must be at least 5 characters long.");
         return;
+    }
+
+    // Validation for feedback questions
+    const feedbackQuestions = [q1, q2, q3, q4, q5];
+    for (let i = 0; i < feedbackQuestions.length; i++) {
+        if (isNaN(feedbackQuestions[i]) || feedbackQuestions[i] < 1 || feedbackQuestions[i] > 10) {
+            alert(`Please provide a valid rating (1-10) for question ${i + 1}.`);
+            return;
+        }
     }
 
     // Concatenate address into a single text string
